@@ -1,6 +1,8 @@
-from data.data import BASE_URL
+from pages.home_page import HomePage
 
 
 def test_open_example(driver):
-    driver.get(BASE_URL)
+    home_page = HomePage(driver)
+    home_page.open()
+
     assert "automation"

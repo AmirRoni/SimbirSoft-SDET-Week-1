@@ -13,25 +13,20 @@ def test_search_and_cart(driver):
     product_page = ProductPage(driver)
     cart_page = CartPage(driver)
 
-    home_page.open()
-    home_page.search("shirt")
-
-    search_page.sort_by_name_asc()
-
     for product_index in [1, 2]:
+        home_page.open()
+        home_page.search("shirt")
+
+        search_page.sort_by_name_asc()
+
         search_page.open_product_by_index(product_index)
 
         quantity = random.randint(1, 6)
         product_page.set_quantity(quantity)
         product_page.add_to_cart()
 
-        driver.back()
-        sleep(1)
-        driver.back()
-        sleep(1)
-
-    cart_page.open()
     cart_items = cart_page.get_cart_items()
+    print(cart_items)
     assert len(cart_items) >= 2, "В корзине должно быть минимум 2 товара"
 
     cheapest_item = cart_page.get_cheapest_item()

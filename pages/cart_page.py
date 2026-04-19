@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 
 from pages.base_page import BasePage
+from data.data import TIMEOUT
 
 
 class CartPage(BasePage):
@@ -66,6 +68,27 @@ class CartPage(BasePage):
                 return
 
         raise AssertionError(f"Товар '{product_name}' не найден в корзине")
+
+    def remove_even_items(self):
+        rows = self.driver.find_elements(*self.CART_ROWS)
+        removable_indexes = []
+
+        for index, row in enumerate(rows, start=1):
+            quantity_inputs = row.find_elements(By.CSS_SELECTOR, "input[name*='quantity']")
+            if quantity_inputs and index % 2 == 0:
+                removable_indexes.append(index)
+
+        for index in reversed(removable_indexes):
+            rows = self.driver.find_elements(*self.CART_ROWS)
+            row = rows[index - 1]
+            remove_button = row.find_element(By.CSS_SELECTOR, ".btn.btn-sm.btn-default")
+
+            previous_rows_count = len(self.driver.find_elements(*self.CART_ROWS))
+            remove_button.click()
+
+            WebDriverWait(self.driver, TIMEOUT).until(
+                lambda d: len(d.find_elements(*self.CART_ROWS)) < previous_rows_count
+            )
 
     def update_cart(self):
         self.click(self.UPDATE_BUTTON)

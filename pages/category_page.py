@@ -5,14 +5,11 @@ from pages.base_page import BasePage
 
 
 class CategoryPage(BasePage):
-    URL = "https://automationteststore.com/index.php?rt=product/category&path=68"
+    PATH = "/index.php?rt=product/category&path=68"
 
     SORT_SELECT = (By.ID, "sort")
     PRODUCT_CARDS = (By.CSS_SELECTOR, ".fixed_wrapper")
     PRODUCT_NAMES = (By.CSS_SELECTOR, ".fixed_wrapper .prdocutname")
-
-    def open(self):
-        super().open(self.URL)
 
     def get_product_names(self) -> list[str]:
         elements = self.driver.find_elements(*self.PRODUCT_NAMES)

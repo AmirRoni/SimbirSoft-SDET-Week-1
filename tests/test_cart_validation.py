@@ -1,15 +1,7 @@
 import random
 
-from pages.home_page import HomePage
-from pages.product_page import ProductPage
-from pages.cart_page import CartPage
 
-
-def test_cart_validation(driver):
-    home_page = HomePage(driver)
-    product_page = ProductPage(driver)
-    cart_page = CartPage(driver)
-
+def test_cart_validation(home_page, product_page, cart_page):
     home_page.open()
 
     product_names = home_page.get_product_names()

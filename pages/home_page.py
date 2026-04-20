@@ -7,17 +7,11 @@ from data.data import TIMEOUT
 
 
 class HomePage(BasePage):
-    URL = "https://automationteststore.com/"
+    PATH = "/"
 
     SEARCH_INPUT = (By.ID, "filter_keyword")
     SEARCH_BUTTON = (By.CSS_SELECTOR, ".button-in-search")
     PRODUCT_LINKS = (By.CSS_SELECTOR, ".fixed_wrapper .prdocutname")
-
-    def open(self):
-        super().open(self.URL)
-        WebDriverWait(self.driver, TIMEOUT).until(
-            EC.visibility_of_any_elements_located(self.PRODUCT_LINKS)
-        )
 
     def search(self, text: str):
         self.type(self.SEARCH_INPUT, text)

@@ -1,3 +1,3 @@
-BASE_URL = 'https://automationteststore.com/'
+BASE_URL = 'https://automationteststore.com'
 
 TIMEOUT = 10

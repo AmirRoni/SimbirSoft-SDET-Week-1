@@ -6,15 +6,12 @@ from data.data import TIMEOUT
 
 
 class CartPage(BasePage):
-    URL = "https://automationteststore.com/index.php?rt=checkout/cart"
+    PATH = "/index.php?rt=checkout/cart"
 
     CART_ROWS = (By.CSS_SELECTOR, ".cart-info.product-list table tbody tr")
     UPDATE_BUTTON = (By.ID, "cart_update")
     TOTAL_VALUE = (By.CSS_SELECTOR, "#totals_table td .totalamout")
     SUBTOTAL_VALUE = (By.CSS_SELECTOR, "#totals_table tr:first-child td:nth-child(2)")
-
-    def open(self):
-        super().open(self.URL)
 
     def parse_price(self, text: str) -> float:
         return float(text.replace("$", "").replace(",", "").strip())

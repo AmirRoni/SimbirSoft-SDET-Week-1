@@ -2,15 +2,17 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementClickInterceptedException
-from data.data import TIMEOUT
+from data.data import BASE_URL, TIMEOUT
 
 
 class BasePage:
+    PATH = ""
+
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
-    def open(self, url: str):
-        self.driver.get(url)
+    def open(self):
+        self.driver.get(f"{BASE_URL}{self.PATH}")
 
     def find(self, locator, timeout: int = TIMEOUT):
         return WebDriverWait(self.driver, timeout).until(

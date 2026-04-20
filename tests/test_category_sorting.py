@@ -1,8 +1,4 @@
-from pages.category_page import CategoryPage
-
-
-def test_category_sorting(driver):
-    category_page = CategoryPage(driver)
+def test_category_sorting(category_page):
     category_page.open()
 
     product_names = category_page.get_product_names()

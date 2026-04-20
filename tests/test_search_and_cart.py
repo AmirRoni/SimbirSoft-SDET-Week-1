@@ -37,9 +37,11 @@ def test_search_and_cart(driver):
 
     updated_items = cart_page.get_cart_items()
 
-    expected_subtotal = sum(
+    expected_items_total = sum(
         item["unit_price"] * item["quantity"] for item in updated_items
     )
-    actual_subtotal = cart_page.get_subtotal()
+    shipping = cart_page.get_shipping()
+    expected_total = expected_items_total + shipping
+    actual_total = cart_page.get_total()
 
-    assert round(actual_subtotal, 2) == round(expected_subtotal, 2), "Промежуточная сумма товаров в корзине рассчитана неверно"
+    assert round(actual_total, 2) == round(expected_total, 2), "Итоговая стоимость корзины рассчитана неверно"

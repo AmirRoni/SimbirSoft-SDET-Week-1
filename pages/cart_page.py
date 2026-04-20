@@ -10,6 +10,7 @@ class CartPage(BasePage):
     UPDATE_BUTTON = (By.ID, "cart_update")
     TOTAL_VALUE = (By.CSS_SELECTOR, "#totals_table td .totalamout")
     SUBTOTAL_VALUE = (By.CSS_SELECTOR, "#totals_table tr:first-child td:nth-child(2)")
+    SHIPPING = (By.CSS_SELECTOR, "#totals_table tr:nth-child(2) td:nth-child(2)")
 
     def open(self):
         super().open(self.URL)
@@ -73,6 +74,10 @@ class CartPage(BasePage):
     def get_subtotal(self) -> float:
         subtotal_text = self.get_text(self.SUBTOTAL_VALUE)
         return self.parse_price(subtotal_text)
+
+    def get_shipping(self) -> float:
+        shipping_text = self.get_text(self.SHIPPING)
+        return self.parse_price(shipping_text)
 
     def get_total(self) -> float:
         totals = self.driver.find_elements(*self.TOTAL_VALUE)

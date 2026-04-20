@@ -13,6 +13,8 @@ def test_cart_validation(home_page, product_page, cart_page):
         home_page.open()
         home_page.open_product_by_index(index)
 
+        product_page.select_required_options()
+
         quantity = random.randint(1, 6)
         product_page.set_quantity(quantity)
         product_page.add_to_cart()

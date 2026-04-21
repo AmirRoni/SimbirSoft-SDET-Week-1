@@ -23,6 +23,7 @@ https://automationteststore.com/
 - Selenium WebDriver (selenium==4.43.0)
 - Chrome (Версия: 147.0.7727.57 (официальная сборка) (64 бит))
 - Allure Report
+- pytest-xdist
 
 ## Что реализовано
 
@@ -47,6 +48,7 @@ https://automationteststore.com/
 - оформлены тест-кейсы в Markdown
 - подключён Allure Report
 - добавлено сохранение скриншота при падении теста
+- возможность параллельного запуска тестов
 
 ## Покрытие по заданию
 
@@ -104,16 +106,26 @@ pip install -r requirements.txt
 ```
 
 ### 4. Запустить все тесты
+последовательный запуск:
 ```bash
 pytest -v
+```
+параллельный запуск:
+```bash
+pytest -n 4 -v
 ```
 
 ---
 
 ## Allure Report
 ### Сгенерировать результаты Allure
+последовательный запуск:
 ```bash
 pytest -v --alluredir=allure-results
+```
+параллельный запуск:
+```bash
+pytest -n 2 -v --alluredir=allure-results
 ```
 
 ### Открыть отчёт
